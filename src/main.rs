@@ -1,8 +1,8 @@
-
 mod linalg;
 
-
 use std::ops::{Neg, Add, Div, Sub, Mul};
+
+use linalg::Matrix;
 
 pub trait ActivationFn<T> {
     fn calculate(&self, x: T) -> T;
@@ -18,8 +18,8 @@ impl PowF for f32 { fn powf(self, exp: Self) -> Self { self.powf(exp) } }
 impl PowF for f64 { fn powf(self, exp: Self) -> Self { self.powf(exp) } }
 
 trait One: Sized { const ONE: Self; }
-impl One for f32 { const ONE: Self = 0.0; }
-impl One for f64 { const ONE: Self = 0.0; }
+impl One for f32 { const ONE: Self = 1.0; }
+impl One for f64 { const ONE: Self = 1.0; }
 
 pub struct Sigmoid;
 impl<T> ActivationFn<T> for Sigmoid
@@ -47,9 +47,17 @@ where
     fn derivative(&self, output: T, expected: T) -> T { (T::ONE + T::ONE) * (output - expected) }
 }
 
-
-
+pub struct DataPoint<T> {
+    value: Vec<T>,
+    expected: Vec<T>,
+}
 
 fn main() {
+    let m_1 = Matrix::vector(vec![1.0, 2.0, 3.0]);
 
+    let m_2 = Matrix::from([
+        [1.0, 2.0, 3.0],
+    ]);
+
+    println!("{:?}", m_2 * m_1);
 }

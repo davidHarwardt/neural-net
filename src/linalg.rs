@@ -64,7 +64,6 @@ impl<T> Matrix<T> {
         let dim = Dim { rows: data.len(), cols: 1 };
         Self { data, dim }
     }
-
 }
 
 impl<T: Copy> Matrix<T> {
