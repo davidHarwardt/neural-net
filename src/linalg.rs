@@ -11,7 +11,6 @@ pub struct Vector<T> {
     elements: Vec<T>,
 }
 
-
 impl<T> Index<usize> for Vector<T> {
     type Output = T;
     fn index(&self, index: usize) -> &Self::Output { &self.elements[index] }
@@ -46,6 +45,9 @@ impl<T> Matrix<T> {
     pub fn col(&self, col: usize) -> impl Iterator<Item = &T> {
         (0..self.dim.rows).map(move |i| &self.data[col + i * self.dim.cols])
     }
+
+    pub fn cols(&self) -> usize { self.dim.cols }
+    pub fn rows(&self) -> usize { self.dim.rows }
 
     pub fn iter<'a>(&'a self) -> std::slice::Iter<'a, T> { self.data.iter() }
 
